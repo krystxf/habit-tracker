@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent {
-  isHabitsMgmtModalOpen = false;
+  isHabitsMgmtModalOpen = true;
 
   handleManageHabits = () => {
     this.isHabitsMgmtModalOpen = !this.isHabitsMgmtModalOpen;
