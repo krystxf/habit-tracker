@@ -1,0 +1,23 @@
+tasks:
+  - name: Setup
+    init: |
+      nvm i;
+      nvm use;
+      npm i;
+      npm run build;
+      gp sync-done setup;
+    command: npm run start
+
+ports:
+  - port: 4200 # Web app
+    onOpen: notify
+    visibility: public
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - mikestead.dotenv 
+    - esbenp.prettier-vscode
+    - wix.vscode-import-cost
+    - pkief.material-icon-theme
+    - Angular.ng-template
