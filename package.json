@@ -1,5 +1,28 @@
 {
-  "name": "app",
+  "name": "habit-tracker",
+  "description": "Keep on track of your daily habits with our easy-to-use app. Simply check the habits you've completed each day, and let our app help you build healthy, lasting habits over time.",
+  "keywords": [
+    "habit tracking",
+    "daily habits",
+    "goal setting",
+    "checklist",
+    "routine",
+    "productivity",
+    "consistency",
+    "reminder",
+    "user-friendly interface"
+  ],
+  "homepage": "https://github.com/krystxf/habit-tracker",
+  "license": "MIT License, check LICENSE.md",
+  "author": {
+    "name": "Krystof Kratky",
+    "email": "krystof.kratky2003@gmail.com",
+    "url": "https://github.com/krystxf"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krystxf/habit-tracker.git"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
