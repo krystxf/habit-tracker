@@ -48,7 +48,7 @@
                 <input
                   type="checkbox"
                   (change)="updateDay(i, dayIndex)"
-                  [defaultChecked]="true"
+                  [defaultChecked]="habitForms.value[i].days[dayIndex]"
                 />
               </td>
             </tr>
