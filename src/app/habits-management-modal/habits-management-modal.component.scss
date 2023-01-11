@@ -1,1 +1,39 @@
- 
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    th {
+      color: #a5a4a1;
+      font-weight: normal;
+      text-align: left;
+    }
+
+    tr {
+      border-bottom: 1px solid rgb(238, 238, 237);
+    }
+  }
+
+  tbody {
+    td {
+      border-right: 1px solid rgb(238, 238, 237);
+      padding: 6px 0;
+    }
+
+    td.habit {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 16px;
+      max-width: 200px;
+    }
+
+    tr {
+      border-bottom: 1px solid rgb(238, 238, 237);
+    }
+  }
+}
+
+.trash-icon {
+  width: 16px;
+}

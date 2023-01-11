@@ -1,65 +1,69 @@
-import { Component, Input, inject } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-habits-management-modal',
-  providers: [CookieService],
-  template: `
-    <div *ngIf="isOpen">
-      <div class="modal-overlay" (click)="onClose()"></div>
-      <div class="modal">
-        <button type="button" class="close" (click)="onClose()">
-          <span class="icon">x</span>
-        </button>
-
-        <h1 class="title">Manage habits</h1>
-
-        <section>
-          <ul>
-            <li *ngFor="let habit of habits">
-              {{ habit }}
-            </li>
-          </ul>
-          <button (click)="handleAddHabit()">
-            <span class="icon">+</span>
-            Add habit
-          </button>
-        </section>
-      </div>
-    </div>
-  `,
+  templateUrl: './habits-management-modal.component.html',
   styleUrls: ['./habits-management-modal.component.scss'],
 })
 export class HabitsManagementModalComponent {
-  cookieService = inject(CookieService);
-
   @Input()
   isOpen: boolean = false;
 
-  habits: string[] = [];
-
-  // habits = ['8hrs of sleep', 'Meditation', 'Running', 'Reading'];
+  days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
   onClose = () => {
     this.isOpen = false;
   };
 
-  handleAddHabit = () => {
-    this.habits.push('New habit');
-    this.cookieService.set('habits', JSON.stringify(this.habits));
-  };
+  myForm: FormGroup;
 
-  getHabits = (): string[] => {
-    return JSON.parse(this.cookieService.get('habits') || '[]') || [];
-  };
+  constructor(private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      habits: this.fb.array([]),
+    });
 
-  constructor() {
-    const tmpHabits = this.getHabits();
+    const habits = JSON.parse(localStorage.getItem('habits') || '[]');
 
-    if (tmpHabits.length > 0) {
-      this.habits = tmpHabits;
-    } else {
-      this.habits = ['8hrs of sleep', 'Meditation', 'Running', 'Reading'];
-    }
+    habits.forEach((habit: any) => {
+      const habitForm = this.fb.group({
+        title: habit.title || 'New habit',
+        days: this.fb.array(
+          habit.days || [true, true, true, true, true, true, true]
+        ),
+      });
+
+      this.habitForms.push(habitForm);
+    });
+
+    // on form update save data to local storage
+    this.myForm.valueChanges.subscribe((value) => {
+      localStorage.setItem('habits', JSON.stringify(value.habits));
+    });
+  }
+
+  get habitForms() {
+    return this.myForm.get('habits') as FormArray;
+  }
+
+  addHabit() {
+    const habit = this.fb.group({
+      title: [],
+      days: this.fb.array([true, true, true, true, true, true, true]),
+    });
+
+    this.habitForms.push(habit);
+  }
+
+  deleteHabit(i: number) {
+    this.habitForms.removeAt(i);
+  }
+
+  updateDay(i: number, ii: number) {
+    this.habitForms.at(i).patchValue({
+      days: this.habitForms.value[i].days.map((day: boolean, index: number) =>
+        index === ii ? !day : day
+      ),
+    });
   }
 }
