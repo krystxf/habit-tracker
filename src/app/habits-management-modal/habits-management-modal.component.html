@@ -12,7 +12,13 @@
         <table>
           <thead>
             <tr>
-              <th>Habit</th>
+              <!-- trash icon -->
+              <th></th>
+
+              <!-- title input -->
+              <th style="padding-left: 12px">Habit</th>
+
+              <!-- days -->
               <th *ngFor="let day of days">{{ day }}</th>
             </tr>
           </thead>
@@ -23,10 +29,7 @@
               *ngFor="let habit of habitForms.controls; index as i"
               [formGroupName]="i"
             >
-              <td class="habit">
-                <!-- habit title -->
-                <input placeholder="Title" formControlName="title" />
-
+              <td>
                 <!-- trash icon -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -44,17 +47,32 @@
                   />
                 </svg>
               </td>
-              <td *ngFor="let day of days; index as dayIndex">
+
+              <!-- habit title -->
+              <td class="habit">
                 <input
-                  type="checkbox"
-                  (change)="updateDay(i, dayIndex)"
-                  [defaultChecked]="habitForms.value[i].days[dayIndex]"
+                  type="text"
+                  placeholder="Title"
+                  formControlName="title"
                 />
+              </td>
+
+              <!-- days -->
+              <td *ngFor="let day of days; index as dayIndex">
+                <label class="container">
+                  <input
+                    type="checkbox"
+                    (change)="updateDay(i, dayIndex)"
+                    [defaultChecked]="habitForms.value[i].days[dayIndex]"
+                  />
+                  <span class="checkmark"></span>
+                </label>
               </td>
             </tr>
 
             <!-- add habit -->
             <tr class="new" (click)="addHabit()">
+              <td></td>
               <td>
                 <span class="icon">+</span>
                 Add habit
