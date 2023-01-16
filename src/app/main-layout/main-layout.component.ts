@@ -11,9 +11,12 @@ import { Component } from '@angular/core';
     ></app-habits-management-modal>
 
     <main>
-      <button type="button" (click)="handleManageHabits()">
-        Manage habits
-      </button>
+      <div class="top">
+        <h1>Calendar</h1>
+        <button type="button" (click)="handleManageHabits()">
+          Manage habits
+        </button>
+      </div>
 
       <app-calendar></app-calendar>
     </main>

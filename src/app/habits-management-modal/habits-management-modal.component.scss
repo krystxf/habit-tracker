@@ -1,4 +1,14 @@
-table { 
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #a5a4a1;
+  margin: 0;
+  padding: 1rem 0;
+  text-align: justify;
+}
+
+table {
   border-collapse: collapse;
   width: 100%;
 
@@ -11,11 +21,11 @@ table {
         color: #a5a4a1;
         font-weight: normal;
         text-align: left;
-      } 
+      }
     }
   }
 
-  tbody { 
+  tbody {
     .habit {
       padding: 0 24px 0 12px;
     }
@@ -108,11 +118,11 @@ table {
     }
 
     tr {
-      border-bottom: 1px solid rgb(223, 227, 231); 
+      border-bottom: 1px solid rgb(223, 227, 231);
     }
   }
 }
 
-.trash-icon { 
-  width: 20px; 
+.trash-icon {
+  width: 20px;
 }

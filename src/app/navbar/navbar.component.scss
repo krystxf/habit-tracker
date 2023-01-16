@@ -14,8 +14,9 @@ header {
     display: flex;
     align-items: center;
     gap: 4rem;
-    width: 100%;
+    width: calc(100% - 4rem);
     max-width: 1200px;
+    padding: 0 2rem;
 
     #left {
       font-weight: 800;

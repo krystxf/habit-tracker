@@ -22,8 +22,4 @@ export class CalendarComponent {
   days = new Array(this.numberOfDaysInMonth).fill(new Array(7).fill(false));
 
   habits = JSON.parse(localStorage.getItem('habits') || '[]');
-
-  ngOnInit() {
-    console.log(this.habits);
-  }
 }

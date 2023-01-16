@@ -6,27 +6,22 @@ body {
 }
 
 button {
-  background: #f7f7f5;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid #e0e0de;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  height: 2.25rem;
+  border-radius: 10px;
+  padding: 0 1rem;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  background: #1a1c1f;
+  color: white;
+  border: none;
 
   cursor: pointer;
 
   transition: all 0.1s ease-in-out;
 
   &:hover {
-    background: #efefef;
-  }
-
-  &:active {
-    background: #dfdfde;
-  }
-
-  .icon {
+    background-color: #303235;
   }
 }
