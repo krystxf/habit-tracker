@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HabitsManagementModalComponent,
     HomeComponent,
     AboutComponent,
+    ModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: !isDevMode(),

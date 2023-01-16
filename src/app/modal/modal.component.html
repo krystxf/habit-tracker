@@ -1,0 +1,17 @@
+<div *ngIf="isOpen">
+  <!-- overlay -->
+  <div class="modal-overlay" (click)="handleClose()"></div>
+
+  <div class="modal">
+    <!-- close button -->
+    <button type="button" class="close" (click)="handleClose()">
+      <span class="icon">x</span>
+    </button>
+
+    <!-- title -->
+    <h1 class="title">{{ title }}</h1>
+
+    <!-- content -->
+    <ng-content></ng-content>
+  </div>
+</div>
