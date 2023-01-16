@@ -14,6 +14,8 @@ import { Component } from '@angular/core';
       <button type="button" (click)="handleManageHabits()">
         Manage habits
       </button>
+
+      <app-calendar></app-calendar>
     </main>
   `,
   styleUrls: ['./main-layout.component.scss'],

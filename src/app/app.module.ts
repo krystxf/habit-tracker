@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ModalComponent } from './modal/modal.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ModalComponent } from './modal/modal.component';
     HomeComponent,
     AboutComponent,
     ModalComponent,
+    CalendarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: !isDevMode(),

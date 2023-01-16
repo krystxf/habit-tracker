@@ -1,0 +1,23 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th *ngFor="let habit of habits">{{ habit.title }}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let day of days; index as i">
+        <td>{{ i + 1 }}.</td>
+
+        <td *ngFor="let habit of habits">
+          <label class="container">
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
