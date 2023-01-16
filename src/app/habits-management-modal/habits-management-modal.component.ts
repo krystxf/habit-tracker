@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
@@ -8,13 +8,10 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class HabitsManagementModalComponent {
   @Input()
-  isOpen: boolean = false;
+  public isOpen: boolean = false;
+  @Output() public onClose = new EventEmitter();
 
   days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-
-  onClose = () => {
-    this.isOpen = false;
-  };
 
   myForm: FormGroup;
 
@@ -44,6 +41,10 @@ export class HabitsManagementModalComponent {
 
   get habitForms() {
     return this.myForm.get('habits') as FormArray;
+  }
+
+  handleClose() {
+    this.onClose.emit();
   }
 
   addHabit() {

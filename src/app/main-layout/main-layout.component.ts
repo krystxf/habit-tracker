@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 
     <app-habits-management-modal
       [isOpen]="isHabitsMgmtModalOpen"
+      (onClose)="isHabitsMgmtModalOpen = false"
     ></app-habits-management-modal>
 
     <main>
@@ -18,7 +19,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent {
-  isHabitsMgmtModalOpen = true;
+  isHabitsMgmtModalOpen = false;
 
   handleManageHabits = () => {
     this.isHabitsMgmtModalOpen = !this.isHabitsMgmtModalOpen;
