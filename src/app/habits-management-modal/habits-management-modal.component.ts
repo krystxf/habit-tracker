@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { IHabit } from 'src/types/habit';
 
 @Component({
   selector: 'app-habits-management-modal',
@@ -10,7 +11,7 @@ export class HabitsManagementModalComponent {
   simplifiedView = true;
   @Input()
   public isOpen: boolean = false;
-  @Output() public onClose = new EventEmitter();
+  @Output() public handleClose = new EventEmitter();
 
   days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 
@@ -27,7 +28,7 @@ export class HabitsManagementModalComponent {
       localStorage.getItem('simplifiedView') || 'true'
     );
 
-    habits.forEach((habit: any) => {
+    habits.forEach((habit: IHabit) => {
       const habitForm = this.fb.group({
         title: habit.title || 'New habit',
         days: this.fb.array(
@@ -48,8 +49,8 @@ export class HabitsManagementModalComponent {
     return this.myForm.get('habits') as FormArray;
   }
 
-  handleClose() {
-    this.onClose.emit();
+  onClose() {
+    this.handleClose.emit();
   }
 
   addHabit() {

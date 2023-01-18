@@ -9,9 +9,9 @@ export class ModalComponent {
   @Input()
   public isOpen: boolean = false;
   @Input() public title: string = '';
-  @Output() public onClose = new EventEmitter();
+  @Output() public handleClose = new EventEmitter();
 
-  handleClose() {
-    this.onClose.emit();
+  onClose() {
+    this.handleClose.emit();
   }
 }

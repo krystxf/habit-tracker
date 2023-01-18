@@ -19,8 +19,6 @@ export class CalendarComponent {
   constructor() {
     this.habits = JSON.parse(localStorage.getItem('habits') || '[]');
 
-    console.log(this.habits);
-
     this.refreshData();
   }
 
