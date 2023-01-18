@@ -18,7 +18,7 @@ import { Component } from '@angular/core';
         </button>
       </div>
 
-      <app-calendar></app-calendar>
+      <app-calendar [showControls]="false"></app-calendar>
     </main>
   `,
   styleUrls: ['./main-layout.component.scss'],

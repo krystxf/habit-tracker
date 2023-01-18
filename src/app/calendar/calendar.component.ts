@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IHabit } from 'src/types/habit';
 
 @Component({
   selector: 'app-calendar',
@@ -6,20 +7,48 @@ import { Component } from '@angular/core';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent {
-  // Create a new Date object for the current date and time
+  @Input()
+  public showControls: boolean = false;
+
   today = new Date();
+  viewer = new Date(this.today.getFullYear(), this.today.getMonth()); // day defaults to 1
+  isNow = false; // is viewer month and year same as current date
+  days: Array<Array<boolean>> = [];
+  habits: Array<IHabit> = [];
 
-  // Use the getFullYear() and getMonth() methods to determine the year and month of the last day of the current month
-  lastDayOfMonth = new Date(
-    this.today.getFullYear(),
-    this.today.getMonth() + 1,
-    0
-  );
+  constructor() {
+    this.habits = JSON.parse(localStorage.getItem('habits') || '[]');
 
-  // Use the getDate() method to get the date of the last day of the current month (which is also the number of days in the current month)
-  numberOfDaysInMonth = this.lastDayOfMonth.getDate();
+    console.log(this.habits);
 
-  days = new Array(this.numberOfDaysInMonth).fill(new Array(7).fill(false));
+    this.refreshData();
+  }
 
-  habits = JSON.parse(localStorage.getItem('habits') || '[]');
+  refreshData() {
+    this.isNow =
+      this.viewer.getMonth() === this.today.getMonth() &&
+      this.viewer.getFullYear() === this.today.getFullYear();
+
+    const numOfDaysInMonth = new Date(
+      this.viewer.getFullYear(),
+      this.viewer.getMonth() + 1, // month needs to be +1 because day is 0 which is the last day of the previous month
+      0
+    ).getDate();
+
+    this.days = new Array(numOfDaysInMonth).fill(
+      new Array(this.habits.length).fill(false)
+    );
+  }
+
+  prevMonth() {
+    this.viewer.setMonth(this.viewer.getMonth() - 1);
+
+    this.refreshData();
+  }
+
+  nextMonth() {
+    this.viewer.setMonth(this.viewer.getMonth() + 1);
+
+    this.refreshData();
+  }
 }
