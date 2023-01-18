@@ -1,0 +1,45 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '**/*.md'
+      - '/src/assets/**'
+
+  pull_request:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '**/*.md'
+      - '/src/assets/**'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run lint
+
+  prettier:
+    name: Prettier
+    continue-on-error: true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm i
+      - run: npm run format:check

@@ -1,4 +1,4 @@
-<app-modal title="Manage habits" [isOpen]="isOpen" (onClose)="handleClose()">
+<app-modal title="Manage habits" [isOpen]="isOpen" (onClose)="onClose()">
   <p>
     Consistency helps establish a routine, making actions automatic and easier
     to maintain. It also allows for tracking progress and measuring success.
@@ -7,9 +7,9 @@
 
   <button type="button" (click)="toggleSimplifiedView()" class="unstyled">
     <span class="icon">
-      {{ simplifiedView ? "-" : "+" }}
+      {{ simplifiedView ? '-' : '+' }}
     </span>
-    {{ simplifiedView ? "Simplified view" : "Advanced view" }}
+    {{ simplifiedView ? 'Simplified view' : 'Advanced view' }}
   </button>
   <p>
     In advanced mode you can customize the days of the week that you want to

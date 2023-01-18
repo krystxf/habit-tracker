@@ -2,7 +2,7 @@
   <ng-template [ngIf]="showControls">
     <button (click)="prevMonth()" class="unstyled"><</button>
     <button (click)="nextMonth()" class="unstyled">></button>
-    {{ viewer.toLocaleString("en-US", { month: "long", year: "numeric" }) }}
+    {{ viewer.toLocaleString('en-US', { month: 'long', year: 'numeric' }) }}
   </ng-template>
   <table>
     <thead>

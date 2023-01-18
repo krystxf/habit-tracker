@@ -16,7 +16,7 @@ ports:
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
-    - mikestead.dotenv 
+    - mikestead.dotenv
     - esbenp.prettier-vscode
     - wix.vscode-import-cost
     - pkief.material-icon-theme
