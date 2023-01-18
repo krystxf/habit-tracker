@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
   styleUrls: ['./habits-management-modal.component.scss'],
 })
 export class HabitsManagementModalComponent {
+  simplifiedView = true;
   @Input()
   public isOpen: boolean = false;
   @Output() public onClose = new EventEmitter();
@@ -21,6 +22,10 @@ export class HabitsManagementModalComponent {
     });
 
     const habits = JSON.parse(localStorage.getItem('habits') || '[]');
+
+    this.simplifiedView = JSON.parse(
+      localStorage.getItem('simplifiedView') || 'true'
+    );
 
     habits.forEach((habit: any) => {
       const habitForm = this.fb.group({
@@ -66,5 +71,10 @@ export class HabitsManagementModalComponent {
         index === ii ? !day : day
       ),
     });
+  }
+
+  toggleSimplifiedView() {
+    this.simplifiedView = !this.simplifiedView;
+    localStorage.setItem('simplifiedView', JSON.stringify(this.simplifiedView));
   }
 }

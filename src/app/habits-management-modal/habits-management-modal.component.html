@@ -5,6 +5,17 @@
     Without consistency, forming and sticking to a habit becomes difficult.
   </p>
 
+  <button type="button" (click)="toggleSimplifiedView()" class="unstyled">
+    <span class="icon">
+      {{ simplifiedView ? "-" : "+" }}
+    </span>
+    {{ simplifiedView ? "Simplified view" : "Advanced view" }}
+  </button>
+  <p>
+    In advanced mode you can customize the days of the week that you want to
+    track each habit.
+  </p>
+
   <form [formGroup]="myForm">
     <table>
       <thead>
@@ -16,7 +27,7 @@
           <th style="padding-left: 12px">Habit</th>
 
           <!-- days -->
-          <th *ngFor="let day of days">{{ day }}</th>
+          <th [ngIf]="!simplifiedView" *ngFor="let day of days">{{ day }}</th>
         </tr>
       </thead>
 
@@ -51,16 +62,18 @@
           </td>
 
           <!-- days -->
-          <td *ngFor="let day of days; index as dayIndex">
-            <label class="container">
-              <input
-                type="checkbox"
-                (change)="updateDay(i, dayIndex)"
-                [defaultChecked]="habitForms.value[i].days[dayIndex]"
-              />
-              <span class="checkmark"></span>
-            </label>
-          </td>
+          <ng-template [ngIf]="simplifiedView">
+            <td *ngFor="let day of days; index as dayIndex">
+              <label class="container">
+                <input
+                  type="checkbox"
+                  (change)="updateDay(i, dayIndex)"
+                  [defaultChecked]="habitForms.value[i].days[dayIndex]"
+                />
+                <span class="checkmark"></span>
+              </label>
+            </td>
+          </ng-template>
         </tr>
 
         <!-- add habit -->

@@ -24,4 +24,16 @@ button {
   &:hover {
     background-color: #303235;
   }
+
+  &.unstyled {
+    background: none;
+    color: #1a1c1f;
+    border: none;
+
+    &:hover {
+      background: none;
+      color: #1a1c1f;
+      border: none;
+    }
+  }
 }
