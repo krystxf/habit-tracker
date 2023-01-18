@@ -1,6 +1,6 @@
 export interface IHabit {
-  title: string;
-  days: daysType;
+  title: string
+  days: daysType
 }
 
 export type daysType = [
@@ -11,4 +11,4 @@ export type daysType = [
   boolean,
   boolean,
   boolean
-];
+]

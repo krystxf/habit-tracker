@@ -34,7 +34,7 @@ table {
       height: 32px;
       padding: 12px 0;
 
-      input[type="text"] {
+      input[type='text'] {
         width: 100%;
         padding: 12px 20px;
         // margin: 8px 0;
@@ -93,7 +93,7 @@ table {
 
       /* Create the checkmark/indicator (hidden when not checked) */
       .checkmark:after {
-        content: "";
+        content: '';
         position: absolute;
         display: none;
       }

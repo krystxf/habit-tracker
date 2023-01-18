@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-main-layout',
@@ -24,9 +24,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent {
-  isHabitsMgmtModalOpen = false;
+  isHabitsMgmtModalOpen = false
 
   handleManageHabits = () => {
-    this.isHabitsMgmtModalOpen = !this.isHabitsMgmtModalOpen;
-  };
+    this.isHabitsMgmtModalOpen = !this.isHabitsMgmtModalOpen
+  }
 }
