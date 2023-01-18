@@ -1,17 +1,7 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - 'main'
-    paths-ignore:
-      - '**/*.md'
-
-  pull_request:
-    branches:
-      - 'main'
-    paths-ignore:
-      - '**/*.md'
+  push
 
 jobs:
   test:
@@ -20,7 +10,7 @@ jobs:
       strategy:
         matrix:
           os: [ubuntu-latest, windows-latest, macos-latest]
-          
+
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
