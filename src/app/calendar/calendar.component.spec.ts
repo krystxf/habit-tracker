@@ -34,7 +34,7 @@ describe('CalendarComponent', () => {
   it('after calling prevMonth(), viewer should be previous month', () => {
     component.prevMonth()
 
-    let expectedMonth = new Date()
+    const expectedMonth = new Date()
     expectedMonth.setMonth(new Date().getMonth() - 1)
 
     expect(component.viewer.getMonth()).toEqual(expectedMonth.getMonth())
@@ -51,7 +51,7 @@ describe('CalendarComponent', () => {
   it('after calling nextMonth(), viewer should be next month', () => {
     component.nextMonth()
 
-    let expectedMonth = new Date()
+    const expectedMonth = new Date()
     expectedMonth.setMonth(new Date().getMonth() + 1)
 
     expect(component.viewer.getMonth()).toEqual(expectedMonth.getMonth())
