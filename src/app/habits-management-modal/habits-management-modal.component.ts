@@ -34,6 +34,7 @@ export class HabitsManagementModalComponent {
         days: this.fb.array(
           habit.days || [true, true, true, true, true, true, true]
         ),
+        id: habit.id || crypto.randomUUID(),
       })
 
       this.habitForms.push(habitForm)
@@ -55,8 +56,9 @@ export class HabitsManagementModalComponent {
 
   addHabit() {
     const habit = this.fb.group({
-      title: [],
+      title: 'New habit',
       days: this.fb.array([true, true, true, true, true, true, true]),
+      id: crypto.randomUUID(),
     })
 
     this.habitForms.push(habit)
