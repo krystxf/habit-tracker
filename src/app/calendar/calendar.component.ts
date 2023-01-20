@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core'
+import { HABITS_KEY } from 'src/constants/localstorage'
 import { IHabit } from 'src/types/habit'
 
 @Component({
@@ -27,7 +28,7 @@ export class CalendarComponent {
   }
 
   refreshHabits() {
-    this.habits = JSON.parse(localStorage.getItem('habits') || '[]')
+    this.habits = JSON.parse(localStorage.getItem(HABITS_KEY) || '[]')
   }
 
   refreshData() {

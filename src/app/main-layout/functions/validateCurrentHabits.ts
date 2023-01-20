@@ -1,11 +1,12 @@
+import { HABITS_KEY } from 'src/constants/localstorage'
 import { IHabit } from 'src/types/habit'
 
 const validateCurrentHabits = () => {
-  const locStorHabits = localStorage.getItem('habits')
+  const locStorHabits = localStorage.getItem(HABITS_KEY)
 
   // if there is no habits in local storage, create an empty array
   if (!locStorHabits) {
-    localStorage.setItem('habits', '[]')
+    localStorage.setItem(HABITS_KEY, '[]')
     return
   }
 
@@ -13,7 +14,7 @@ const validateCurrentHabits = () => {
 
   // if there is a habits in local storage, but it is not an array, create an empty array
   if (!Array.isArray(parsed)) {
-    localStorage.setItem('habits', '[]')
+    localStorage.setItem(HABITS_KEY, '[]')
     return
   }
 
@@ -39,7 +40,7 @@ const validateCurrentHabits = () => {
     }
   })
 
-  localStorage.setItem('habits', JSON.stringify(valid))
+  localStorage.setItem(HABITS_KEY, JSON.stringify(valid))
 }
 
 export default validateCurrentHabits

@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core'
-import validateCurrentHabits from './functions/validateCurrentHabits'
+import { validateCurrentHabits, validateTrackingdata } from './functions'
 
 @Component({
   selector: 'app-main-layout',
@@ -28,6 +28,7 @@ export class MainLayoutComponent {
   @HostListener('window:storage', ['$event'])
   onStorageChange() {
     validateCurrentHabits()
+    validateTrackingdata()
   }
   isHabitsMgmtModalOpen = false
 
@@ -37,5 +38,6 @@ export class MainLayoutComponent {
 
   ngOnInit() {
     validateCurrentHabits()
+    validateTrackingdata()
   }
 }
