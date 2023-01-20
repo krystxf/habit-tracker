@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, HostListener, Input } from '@angular/core'
 import { IHabit } from 'src/types/habit'
 
 @Component({
@@ -7,6 +7,11 @@ import { IHabit } from 'src/types/habit'
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent {
+  @HostListener('window:storage', ['$event'])
+  onStorageChange(/* event: StorageEvent */) {
+    this.refreshHabits()
+    this.refreshData()
+  }
   @Input()
   public showControls: boolean = false
 
@@ -17,9 +22,12 @@ export class CalendarComponent {
   habits: Array<IHabit> = []
 
   constructor() {
-    this.habits = JSON.parse(localStorage.getItem('habits') || '[]')
-
+    this.refreshHabits()
     this.refreshData()
+  }
+
+  refreshHabits() {
+    this.habits = JSON.parse(localStorage.getItem('habits') || '[]')
   }
 
   refreshData() {
