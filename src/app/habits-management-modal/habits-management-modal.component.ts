@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms'
+import { HABITS_KEY } from 'src/constants/localstorage'
 import { IHabit } from 'src/types/habit'
 
 @Component({
@@ -22,7 +23,7 @@ export class HabitsManagementModalComponent {
       habits: this.fb.array([]),
     })
 
-    const habits = JSON.parse(localStorage.getItem('habits') || '[]')
+    const habits = JSON.parse(localStorage.getItem(HABITS_KEY) || '[]')
 
     this.simplifiedView = JSON.parse(
       localStorage.getItem('simplifiedView') || 'true'
@@ -34,6 +35,7 @@ export class HabitsManagementModalComponent {
         days: this.fb.array(
           habit.days || [true, true, true, true, true, true, true]
         ),
+        id: habit.id || crypto.randomUUID(),
       })
 
       this.habitForms.push(habitForm)
@@ -41,12 +43,12 @@ export class HabitsManagementModalComponent {
 
     // on form update save data to local storage
     this.myForm.valueChanges.subscribe((value) => {
-      localStorage.setItem('habits', JSON.stringify(value.habits))
+      localStorage.setItem(HABITS_KEY, JSON.stringify(value.habits))
     })
   }
 
   get habitForms() {
-    return this.myForm.get('habits') as FormArray
+    return this.myForm.get(HABITS_KEY) as FormArray
   }
 
   onClose() {
@@ -55,8 +57,9 @@ export class HabitsManagementModalComponent {
 
   addHabit() {
     const habit = this.fb.group({
-      title: [],
+      title: 'New habit',
       days: this.fb.array([true, true, true, true, true, true, true]),
+      id: crypto.randomUUID(),
     })
 
     this.habitForms.push(habit)
