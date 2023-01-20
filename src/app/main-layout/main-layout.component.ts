@@ -7,7 +7,7 @@ import { Component } from '@angular/core'
 
     <app-habits-management-modal
       [isOpen]="isHabitsMgmtModalOpen"
-      (onClose)="isHabitsMgmtModalOpen = false"
+      (handleClose)="isHabitsMgmtModalOpen = false"
     ></app-habits-management-modal>
 
     <main>
