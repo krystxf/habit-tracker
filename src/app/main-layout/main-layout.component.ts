@@ -36,7 +36,7 @@ export class MainLayoutComponent {
     this.isHabitsMgmtModalOpen = !this.isHabitsMgmtModalOpen
   }
 
-  ngOnInit() {
+  constructor() {
     validateCurrentHabits()
     validateTrackingdata()
   }

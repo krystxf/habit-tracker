@@ -27,7 +27,7 @@ const validateCurrentHabits = () => {
         : false
 
     const isDaysArrayValid =
-      Array.isArray(habit.days) &&
+      Array.isArray(habit?.days) &&
       habit.days.length === 7 &&
       habit.days.every((day: any) => typeof day === 'boolean')
 
