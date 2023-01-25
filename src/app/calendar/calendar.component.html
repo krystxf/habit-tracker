@@ -22,7 +22,7 @@
         <td>{{ i + 1 }}.</td>
 
         <td *ngFor="let habit of habits">
-          <label class="container">
+          <label class="container" (change)="toggleCheck(i, habit.id)">
             <input type="checkbox" />
             <span class="checkmark"></span>
           </label>

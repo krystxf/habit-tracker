@@ -1,5 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core'
-import { HABITS_KEY } from 'src/constants/localstorage'
+import { HABITS_KEY, TRACKING_DATA_KEY } from 'src/constants/localstorage'
 import { IHabit } from 'src/types/habit'
 
 @Component({
@@ -29,6 +29,8 @@ export class CalendarComponent {
 
   refreshHabits() {
     this.habits = JSON.parse(localStorage.getItem(HABITS_KEY) || '[]')
+
+    console.log(this.habits)
   }
 
   refreshData() {
@@ -45,6 +47,42 @@ export class CalendarComponent {
     this.days = new Array(numOfDaysInMonth).fill(
       new Array(this.habits.length).fill(false)
     )
+  }
+
+  toggleCheck(day: number, habitId: string) {
+    const localStorageData = JSON.parse(
+      localStorage.getItem(TRACKING_DATA_KEY) || '{}'
+    )
+
+    const selectedYear = this.viewer.getFullYear()
+    const selectedMonth = this.viewer.getMonth()
+
+    if (!localStorageData[selectedYear]) localStorageData[selectedYear] = {}
+
+    if (!localStorageData[selectedYear][selectedMonth])
+      localStorageData[selectedYear][selectedMonth] = {}
+
+    const habitIndex = localStorageData[selectedYear][
+      selectedMonth
+    ].habits.findIndex(({ id }: any) => id === habitId)
+
+    if (habitIndex === -1) return // habit not found
+    console.log(localStorageData)
+
+    const done = new Set(
+      localStorageData[selectedYear][selectedMonth].habits[habitIndex].done
+    )
+
+    if (done.has(day)) {
+      done.delete(day)
+    } else {
+      done.add(day)
+    }
+
+    localStorageData[selectedYear][selectedMonth].habits[habitIndex].done =
+      Array.from(done)
+
+    localStorage.setItem(TRACKING_DATA_KEY, JSON.stringify(localStorageData))
   }
 
   prevMonth() {

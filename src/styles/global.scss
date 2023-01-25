@@ -25,6 +25,18 @@ button {
     background-color: #303235;
   }
 
+  &.outlined {
+    background: none;
+    color: #1a1c1f;
+    border: 1px solid #1a1c1f;
+
+    &:hover {
+      background: #1a1c1f;
+      color: white;
+      border: none;
+    }
+  }
+
   &.unstyled {
     background: none;
     color: #1a1c1f;
