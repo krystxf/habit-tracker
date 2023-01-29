@@ -1,5 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core'
 import { HABITS_KEY, TRACKING_DATA_KEY } from 'src/constants/localstorage'
+import getNumOfDaysInMonth from 'src/functions/getNumOfDaysInMonth'
 import { IHabit } from 'src/types/habit'
 
 @Component({
@@ -9,7 +10,7 @@ import { IHabit } from 'src/types/habit'
 })
 export class CalendarComponent {
   @HostListener('window:storage', ['$event'])
-  onStorageChange(/* event: StorageEvent */) {
+  onStorageChange() {
     this.refreshHabits()
     this.refreshData()
   }
@@ -38,11 +39,10 @@ export class CalendarComponent {
       this.viewer.getMonth() === this.today.getMonth() &&
       this.viewer.getFullYear() === this.today.getFullYear()
 
-    const numOfDaysInMonth = new Date(
+    const numOfDaysInMonth = getNumOfDaysInMonth(
       this.viewer.getFullYear(),
-      this.viewer.getMonth() + 1, // month needs to be +1 because day is 0 which is the last day of the previous month
-      0
-    ).getDate()
+      this.viewer.getMonth()
+    )
 
     this.days = new Array(numOfDaysInMonth).fill(
       new Array(this.habits.length).fill(false)

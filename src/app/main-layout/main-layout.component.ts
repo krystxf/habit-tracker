@@ -19,7 +19,7 @@ import { validateCurrentHabits, validateTrackingdata } from './functions'
         </button>
       </div>
 
-      <app-calendar [showControls]="false"></app-calendar>
+      <app-calendar [showControls]="true"></app-calendar>
     </main>
   `,
   styleUrls: ['./main-layout.component.scss'],

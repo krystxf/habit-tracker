@@ -52,9 +52,8 @@ describe('CalendarComponent', () => {
     component.nextMonth()
 
     const expectedMonth = new Date()
-    expectedMonth.setMonth(new Date().getMonth() + 1)
 
-    expect(component.viewer.getMonth()).toEqual(expectedMonth.getMonth())
+    expect(component.viewer.getMonth()).toEqual(expectedMonth.getMonth() + 1)
   })
 
   it('after calling nextMonth() 12x, viewer should be next year', () => {
