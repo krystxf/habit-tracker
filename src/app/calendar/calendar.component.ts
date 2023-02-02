@@ -1,7 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core'
 import { HABITS_KEY, TRACKING_DATA_KEY } from 'src/constants/localstorage'
 import getNumOfDaysInMonth from 'src/functions/getNumOfDaysInMonth'
-import { IHabit } from 'src/types/habit'
+import { parseHabits } from './functions/habitsValidation'
 
 @Component({
   selector: 'app-calendar',
@@ -9,10 +9,11 @@ import { IHabit } from 'src/types/habit'
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent {
+  Arr = Array
   @HostListener('window:storage', ['$event'])
   onStorageChange() {
-    this.refreshHabits()
     this.refreshData()
+    this.habits = this.readHabits()
   }
   @Input()
   public showControls: boolean = false
@@ -20,18 +21,47 @@ export class CalendarComponent {
   today = new Date()
   viewer = new Date(this.today.getFullYear(), this.today.getMonth()) // day defaults to 1
   isNow = false // is viewer month and year same as current date
-  days: Array<Array<boolean>> = []
-  habits: Array<IHabit> = []
+  days: { habit: string; done: number[] }[] = []
+  habits: any[] = []
+  numOfDaysInMonth = 0
 
   constructor() {
-    this.refreshHabits()
+    this.habits = this.readHabits()
+
+    // this.refreshHabits()
     this.refreshData()
   }
 
   refreshHabits() {
     this.habits = JSON.parse(localStorage.getItem(HABITS_KEY) || '[]')
+  }
 
-    console.log(this.habits)
+  readHabits() {
+    const raw = localStorage.getItem(TRACKING_DATA_KEY)
+    if (!raw) {
+      console.error(`localStorage doesn't contain "${TRACKING_DATA_KEY}"`)
+      return []
+    }
+
+    const parsed = JSON.parse(raw)
+
+    const selectedYear = this.viewer.getFullYear()
+    const selectedMonth = this.viewer.getMonth()
+
+    if (!parsed[selectedYear]) {
+      console.error(`"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}" key`)
+      return []
+    }
+    if (!parsed[selectedYear][selectedMonth]) {
+      console.error(
+        `"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}.${selectedMonth}" key`
+      )
+      return []
+    }
+
+    const habits = parseHabits(parsed[selectedYear][selectedMonth].habits)
+
+    return habits
   }
 
   refreshData() {
@@ -39,14 +69,12 @@ export class CalendarComponent {
       this.viewer.getMonth() === this.today.getMonth() &&
       this.viewer.getFullYear() === this.today.getFullYear()
 
-    const numOfDaysInMonth = getNumOfDaysInMonth(
+    this.numOfDaysInMonth = getNumOfDaysInMonth(
       this.viewer.getFullYear(),
       this.viewer.getMonth()
     )
 
-    this.days = new Array(numOfDaysInMonth).fill(
-      new Array(this.habits.length).fill(false)
-    )
+    this.days = this.habits.map((habit) => ({ habit: habit.id, done: [] }))
   }
 
   toggleCheck(day: number, habitId: string) {
@@ -89,11 +117,13 @@ export class CalendarComponent {
     this.viewer.setMonth(this.viewer.getMonth() - 1)
 
     this.refreshData()
+    this.habits = this.readHabits()
   }
 
   nextMonth() {
     this.viewer.setMonth(this.viewer.getMonth() + 1)
 
     this.refreshData()
+    this.habits = this.readHabits()
   }
 }

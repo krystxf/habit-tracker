@@ -3,7 +3,7 @@ import { IHabit } from 'src/types/habit'
 
 const validateTrackingdata = () => {
   const habits = JSON.parse(
-    localStorage.getItem(HABITS_KEY) as string
+    localStorage.getItem(HABITS_KEY) || 'null'
   ) as IHabit[] // add validation for habits
 
   const DEFAULT = {

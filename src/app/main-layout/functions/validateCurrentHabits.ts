@@ -31,8 +31,6 @@ const validateCurrentHabits = () => {
       habit.days.length === 7 &&
       habit.days.every((day: any) => typeof day === 'boolean')
 
-    console.log({ isIdValid })
-
     return {
       id: isIdValid ? habit.id : crypto.randomUUID(),
       title: typeof habit.title === 'string' ? habit.title : 'New habit',

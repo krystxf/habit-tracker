@@ -16,14 +16,14 @@
 
     <tbody>
       <tr
-        *ngFor="let day of days; index as i"
+        *ngFor="let _ of Arr(numOfDaysInMonth).fill(1); index as i"
         [ngClass]="{ today: isNow && i + 1 === today.getDate() }"
       >
         <td>{{ i + 1 }}.</td>
 
         <td *ngFor="let habit of habits">
           <label class="container" (change)="toggleCheck(i, habit.id)">
-            <input type="checkbox" />
+            <input type="checkbox" [checked]="habit.done.includes(i)" />
             <span class="checkmark"></span>
           </label>
         </td>
