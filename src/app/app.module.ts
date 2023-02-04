@@ -12,7 +12,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { ModalComponent } from './modal/modal.component'
-import { CalendarComponent } from './calendar/calendar.component'
+import { CalendarComponent } from './calendar/calendar.component';
+import { IonicModule } from '@ionic/angular'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CalendarComponent } from './calendar/calendar.component'
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    IonicModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

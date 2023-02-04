@@ -1,45 +1,11 @@
+import { daysType } from 'src/types/habit'
+
 const isValidDoneElement = (element: any): boolean => {
   // element a numbers between 1 and 31
   return typeof element === 'number' && element > 0 && element < 31
 }
 
-const isValidDays = (days: any): boolean => {
-  return (
-    Array.isArray(days) &&
-    days.length === 7 &&
-    days.every((day) => typeof day === 'boolean')
-  )
-}
-
-export const isValidHabit = (habit: any): boolean => {
-  if (typeof habit !== 'object') return false
-
-  // validate habit.id
-  if (typeof habit.id !== 'string') return false
-
-  // validate habit.title
-  if (typeof habit.title !== 'string') return false
-
-  // validate habit.days
-  // habit.days must be an array of 7 booleans
-  const { days } = habit
-  if (!isValidDays(days)) return false
-
-  // validate habit.done
-  const { done } = habit
-  if (!Array.isArray(done) || done.some((e) => !isValidDoneElement(e)))
-    return false
-
-  return true
-}
-
-export const isValidHabits = (habits: any): boolean => {
-  if (!Array.isArray(habits)) return false
-
-  return habits.every(isValidHabit)
-}
-
-export const parseHabit = (habit: any) => {
+export const parseHabit = (habit: any): IHabit | null => {
   // if habit can't be parsed, return undefined, otherwise replace invalid data with valid data
 
   const parsed = {
@@ -52,7 +18,7 @@ export const parseHabit = (habit: any) => {
   // habit must be an object
   if (typeof habit !== 'object') {
     console.error('parseHabit: habit is not an object')
-    return undefined
+    return null
   }
 
   // validate habit.id
@@ -87,11 +53,19 @@ export const parseHabit = (habit: any) => {
   return parsed
 }
 
-export const parseHabits = (habits: any) => {
+export const parseHabits = (habits: any): IHabit[] => {
   if (!Array.isArray(habits)) {
     console.error('parseHabits: habits is not an array')
     return []
   }
 
-  return habits.map(parseHabit).filter((habit) => habit !== undefined)
+  // @ts-ignore just wtf this literally cannot be null
+  return habits.map(parseHabit).filter((habit) => habit !== null)
+}
+
+interface IHabit {
+  title: string
+  days: daysType
+  id: string
+  done: number[]
 }
