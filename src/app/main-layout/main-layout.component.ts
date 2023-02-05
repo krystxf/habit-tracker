@@ -12,7 +12,10 @@ import { Component, HostListener } from '@angular/core'
 
     <main>
       <div class="top">
-        <h1>Calendar</h1>
+        <h1 style="display: flex; align-items: center; gap: 8px;">
+          <ion-icon name="calendar-outline"></ion-icon>
+          Calendar
+        </h1>
         <button type="button" (click)="handleManageHabits()">
           Manage habits
         </button>

@@ -1,15 +1,39 @@
 <div>
   <ng-template [ngIf]="showControls">
-    <button (click)="prevMonth()" class="unstyled"><</button>
-    <button (click)="nextMonth()" class="unstyled">></button>
-    {{ viewer.toLocaleString('en-US', { month: 'long', year: 'numeric' }) }}
+    <div id="heading">
+      <div style="display: flex; gap: 4px">
+        <button
+          (click)="currentMonth()"
+          class="unstyled control-button"
+          style="padding: 0 16px"
+        >
+          Today
+        </button>
+        <button (click)="prevMonth()" class="unstyled control-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+        <button (click)="nextMonth()" class="unstyled control-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </button>
+      </div>
+      {{ viewer.toLocaleString('en-US', { month: 'long', year: 'numeric' }) }}
+    </div>
   </ng-template>
   <table>
     <thead>
       <tr>
         <th>Day</th>
         <th *ngFor="let habit of habits">
-          {{ habit.title }}
+          <div style="display: flex; justify-content: space-evenly">
+            <div style="display: flex; align-items: center; gap: 8px">
+              {{ habit.title }}
+
+              <ion-icon
+                name="trash-outline"
+                (click)="removeHabit(habit.id)"
+              ></ion-icon>
+            </div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -22,10 +46,12 @@
         <td>{{ i + 1 }}.</td>
 
         <td *ngFor="let habit of habits">
-          <label class="container" (change)="toggleCheck(i, habit.id)">
-            <input type="checkbox" [checked]="habit.done.includes(i)" />
-            <span class="checkmark"></span>
-          </label>
+          <div style="display: flex; justify-content: space-evenly">
+            <label class="container" (change)="toggleCheck(i, habit.id)">
+              <input type="checkbox" [checked]="habit.done.includes(i)" />
+              <span class="checkmark"></span>
+            </label>
+          </div>
         </td>
       </tr>
     </tbody>

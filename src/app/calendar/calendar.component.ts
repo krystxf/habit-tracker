@@ -113,16 +113,56 @@ export class CalendarComponent {
     localStorage.setItem(TRACKING_DATA_KEY, JSON.stringify(localStorageData))
   }
 
-  prevMonth() {
+  prevMonth(): void {
     this.viewer.setMonth(this.viewer.getMonth() - 1)
 
     this.refreshData()
     this.habits = this.readHabits()
   }
 
-  nextMonth() {
+  nextMonth(): void {
     this.viewer.setMonth(this.viewer.getMonth() + 1)
 
+    this.refreshData()
+    this.habits = this.readHabits()
+  }
+
+  currentMonth(): void {
+    this.viewer = new Date()
+
+    this.refreshData()
+    this.habits = this.readHabits()
+  }
+
+  removeHabit(id: string): void {
+    const raw = localStorage.getItem(TRACKING_DATA_KEY)
+
+    if (!raw) {
+      console.error(`localStorage doesn't contain "${TRACKING_DATA_KEY}"`)
+      return
+    }
+
+    const parsed = JSON.parse(raw)
+
+    const selectedYear = this.viewer.getFullYear()
+    const selectedMonth = this.viewer.getMonth()
+
+    if (
+      typeof parsed !== 'object' ||
+      parsed[selectedYear] === undefined ||
+      parsed[selectedYear][selectedMonth] === undefined
+    ) {
+      console.error(`"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}" key`)
+      return
+    }
+
+    const habitIndex = parsed[selectedYear][selectedMonth].habits.findIndex(
+      (habit: any) => habit.id === id
+    )
+
+    parsed[selectedYear][selectedMonth].habits.splice(habitIndex, 1)
+
+    localStorage.setItem(TRACKING_DATA_KEY, JSON.stringify(parsed))
     this.refreshData()
     this.habits = this.readHabits()
   }
