@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core'
+import { NgModule, isDevMode, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { AppComponent } from './app.component'
@@ -12,8 +12,9 @@ import { AppRoutingModule } from './app-routing.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { ModalComponent } from './modal/modal.component'
-import { CalendarComponent } from './calendar/calendar.component'
-import { IonicModule } from '@ionic/angular'
+import { CalendarComponent } from './calendar/calendar.component';
+import { HeaderComponent } from './calendar/header/header.component';
+import { HabitTitleComponent } from './calendar/habit-title/habit-title.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { IonicModule } from '@ionic/angular'
     AboutComponent,
     ModalComponent,
     CalendarComponent,
+    HeaderComponent,
+    HabitTitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,9 @@ import { IonicModule } from '@ionic/angular'
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    IonicModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

@@ -65,14 +65,14 @@ export class CalendarComponent {
   }
 
   refreshData() {
+    const viewerMonth = this.viewer.getMonth()
+    const viewerYear = this.viewer.getFullYear()
+
     this.isNow =
-      this.viewer.getMonth() === this.today.getMonth() &&
+      viewerMonth === this.today.getMonth() &&
       this.viewer.getFullYear() === this.today.getFullYear()
 
-    this.numOfDaysInMonth = getNumOfDaysInMonth(
-      this.viewer.getFullYear(),
-      this.viewer.getMonth()
-    )
+    this.numOfDaysInMonth = getNumOfDaysInMonth(viewerMonth, viewerYear)
 
     this.days = this.habits.map((habit) => ({ habit: habit.id, done: [] }))
   }
