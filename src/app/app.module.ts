@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { ModalComponent } from './modal/modal.component'
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './calendar/calendar.component'
 import { IonicModule } from '@ionic/angular'
 
 @NgModule({
