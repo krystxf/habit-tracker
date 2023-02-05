@@ -22,12 +22,15 @@
   <table>
     <thead>
       <tr>
+        <!-- row number -->
         <th>Day</th>
+
         <th *ngFor="let habit of habits">
           <div style="display: flex; justify-content: space-evenly">
             <div style="display: flex; align-items: center; gap: 8px">
               {{ habit.title }}
 
+              <!-- trash icon -->
               <ion-icon
                 name="trash-outline"
                 (click)="removeHabit(habit.id)"
@@ -35,6 +38,9 @@
             </div>
           </div>
         </th>
+
+        <!-- add habit column -->
+        <th><ion-icon name="add-outline" (click)="addHabit()"></ion-icon></th>
       </tr>
     </thead>
 
@@ -43,6 +49,7 @@
         *ngFor="let _ of Arr(numOfDaysInMonth).fill(1); index as i"
         [ngClass]="{ today: isNow && i + 1 === today.getDate() }"
       >
+        <!-- row number -->
         <td>{{ i + 1 }}.</td>
 
         <td *ngFor="let habit of habits">
@@ -53,6 +60,9 @@
             </label>
           </div>
         </td>
+
+        <!-- add habit column -->
+        <td></td>
       </tr>
     </tbody>
   </table>

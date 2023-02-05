@@ -95,7 +95,6 @@ export class CalendarComponent {
     ].habits.findIndex(({ id }: any) => id === habitId)
 
     if (habitIndex === -1) return // habit not found
-    console.log(localStorageData)
 
     const done = new Set(
       localStorageData[selectedYear][selectedMonth].habits[habitIndex].done
@@ -134,33 +133,95 @@ export class CalendarComponent {
     this.habits = this.readHabits()
   }
 
-  removeHabit(id: string): void {
-    const raw = localStorage.getItem(TRACKING_DATA_KEY)
+  getParsed(): { [key: string]: any } {
+    const raw = localStorage.getItem(TRACKING_DATA_KEY) || '{}' // if not found, create empty object
 
-    if (!raw) {
-      console.error(`localStorage doesn't contain "${TRACKING_DATA_KEY}"`)
-      return
+    let parsed: any
+    try {
+      parsed = JSON.parse(raw)
+
+      if (typeof parsed !== 'object') {
+        console.error(`"${TRACKING_DATA_KEY}" is not an object`)
+        parsed = {}
+      }
+    } catch (e) {
+      console.error(`"${TRACKING_DATA_KEY}" is not a valid JSON - ${e}`)
+      parsed = {}
     }
 
-    const parsed = JSON.parse(raw)
+    return parsed
+  }
+
+  removeHabit(id: string): void {
+    const parsed = this.getParsed()
 
     const selectedYear = this.viewer.getFullYear()
     const selectedMonth = this.viewer.getMonth()
 
-    if (
-      typeof parsed !== 'object' ||
-      parsed[selectedYear] === undefined ||
-      parsed[selectedYear][selectedMonth] === undefined
-    ) {
+    if (parsed[selectedYear] === undefined) {
       console.error(`"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}" key`)
-      return
+      parsed[selectedYear] = {}
+    }
+
+    if (parsed[selectedYear][selectedMonth] === undefined) {
+      console.error(
+        `"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}.${selectedMonth}" key`
+      )
+      parsed[selectedYear][selectedMonth] = {
+        habits: [],
+      }
     }
 
     const habitIndex = parsed[selectedYear][selectedMonth].habits.findIndex(
       (habit: any) => habit.id === id
     )
 
+    if (habitIndex === -1) {
+      console.error(
+        `"${TRACKING_DATA_KEY}" doesn't have habit with id "${id}" in "${selectedYear}.${selectedMonth}"`
+      )
+      return
+    }
+
     parsed[selectedYear][selectedMonth].habits.splice(habitIndex, 1)
+
+    localStorage.setItem(TRACKING_DATA_KEY, JSON.stringify(parsed))
+    this.refreshData()
+    this.habits = this.readHabits()
+  }
+
+  addHabit(index?: number): void {
+    const parsed = this.getParsed()
+
+    const selectedYear = this.viewer.getFullYear()
+    const selectedMonth = this.viewer.getMonth()
+
+    if (parsed[selectedYear] === undefined) {
+      console.error(`"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}" key`)
+      parsed[selectedYear] = {}
+    }
+
+    if (parsed[selectedYear][selectedMonth] === undefined) {
+      console.error(
+        `"${TRACKING_DATA_KEY}" doesn't have "${selectedYear}.${selectedMonth}" key`
+      )
+      parsed[selectedYear][selectedMonth] = {
+        habits: [],
+      }
+    }
+
+    const newHabit = {
+      id: crypto.randomUUID(),
+      title: 'New habit',
+      done: [],
+      days: [true, true, true, true, true, true, true],
+    }
+
+    if (index === undefined) {
+      parsed[selectedYear][selectedMonth].habits.push(newHabit)
+    } else {
+      parsed[selectedYear][selectedMonth].habits.splice(index, 0, newHabit)
+    }
 
     localStorage.setItem(TRACKING_DATA_KEY, JSON.stringify(parsed))
     this.refreshData()

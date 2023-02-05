@@ -22,13 +22,13 @@ export const parseHabit = (habit: any): IHabit | null => {
   }
 
   // validate habit.id
-  if (typeof parsed.id !== 'string') {
+  if (typeof habit.id !== 'string') {
     console.error('parseHabit: habit.id is not a string')
     parsed.id = crypto.randomUUID()
   }
 
   // validate habit.title
-  if (typeof parsed.title !== 'string') {
+  if (typeof habit.title !== 'string') {
     console.error('parseHabit: habit.title is not a string')
     parsed.title = 'New Habit'
   }
