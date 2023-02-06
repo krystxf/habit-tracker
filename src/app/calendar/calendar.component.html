@@ -16,6 +16,7 @@
         <th *ngFor="let habit of habits">
           <app-calendar-habit-title
             [habit]="habit"
+            [viewer]="viewer"
             (removeHabit)="removeHabit(habit.id)"
           ></app-calendar-habit-title>
         </th>

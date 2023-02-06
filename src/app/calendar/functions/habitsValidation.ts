@@ -1,3 +1,4 @@
+import { TRACKING_DATA_KEY } from 'src/constants/localstorage'
 import { daysType } from 'src/types/habit'
 
 const isValidDoneElement = (element: any): boolean => {
@@ -68,4 +69,23 @@ interface IHabit {
   days: daysType
   id: string
   done: number[]
+}
+
+export const getParsed = (): { [key: string]: any } => {
+  const raw = localStorage.getItem(TRACKING_DATA_KEY) || '{}' // if not found, create empty object
+
+  let parsed: any
+  try {
+    parsed = JSON.parse(raw)
+
+    if (typeof parsed !== 'object') {
+      console.error(`"${TRACKING_DATA_KEY}" is not an object`)
+      parsed = {}
+    }
+  } catch (e) {
+    console.error(`"${TRACKING_DATA_KEY}" is not a valid JSON - ${e}`)
+    parsed = {}
+  }
+
+  return parsed
 }

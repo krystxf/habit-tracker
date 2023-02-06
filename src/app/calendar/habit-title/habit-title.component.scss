@@ -1,0 +1,7 @@
+input {
+  background-color: white;
+
+  &:read-only {
+    background-color: red;
+  }
+}

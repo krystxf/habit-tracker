@@ -1,7 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core'
 import { HABITS_KEY, TRACKING_DATA_KEY } from 'src/constants/localstorage'
 import getNumOfDaysInMonth from 'src/functions/getNumOfDaysInMonth'
-import { parseHabits } from './functions/habitsValidation'
+import { getParsed, parseHabits } from './functions/habitsValidation'
 
 @Component({
   selector: 'app-calendar',
@@ -133,27 +133,8 @@ export class CalendarComponent {
     this.habits = this.readHabits()
   }
 
-  getParsed(): { [key: string]: any } {
-    const raw = localStorage.getItem(TRACKING_DATA_KEY) || '{}' // if not found, create empty object
-
-    let parsed: any
-    try {
-      parsed = JSON.parse(raw)
-
-      if (typeof parsed !== 'object') {
-        console.error(`"${TRACKING_DATA_KEY}" is not an object`)
-        parsed = {}
-      }
-    } catch (e) {
-      console.error(`"${TRACKING_DATA_KEY}" is not a valid JSON - ${e}`)
-      parsed = {}
-    }
-
-    return parsed
-  }
-
   removeHabit(id: string): void {
-    const parsed = this.getParsed()
+    const parsed = getParsed()
 
     const selectedYear = this.viewer.getFullYear()
     const selectedMonth = this.viewer.getMonth()
@@ -191,7 +172,7 @@ export class CalendarComponent {
   }
 
   addHabit(index?: number): void {
-    const parsed = this.getParsed()
+    const parsed = getParsed()
 
     const selectedYear = this.viewer.getFullYear()
     const selectedMonth = this.viewer.getMonth()
