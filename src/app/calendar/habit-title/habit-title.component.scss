@@ -1,7 +1,16 @@
 input {
   background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 6px 12px 6px 12px;
 
   &:read-only {
-    background-color: red;
+    border-color: transparent;
+  }
+
+  &:focus {
+    border-color: #66afe9;
+    outline: 0;
   }
 }
