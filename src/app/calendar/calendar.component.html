@@ -1,23 +1,11 @@
 <div>
   <ng-template [ngIf]="showControls">
-    <div id="heading">
-      <div style="display: flex; gap: 4px">
-        <button
-          (click)="currentMonth()"
-          class="unstyled control-button"
-          style="padding: 0 16px"
-        >
-          Today
-        </button>
-        <button (click)="prevMonth()" class="unstyled control-button">
-          <ion-icon name="chevron-back-outline"></ion-icon>
-        </button>
-        <button (click)="nextMonth()" class="unstyled control-button">
-          <ion-icon name="chevron-forward-outline"></ion-icon>
-        </button>
-      </div>
-      {{ viewer.toLocaleString('en-US', { month: 'long', year: 'numeric' }) }}
-    </div>
+    <app-calendar-header
+      [viewer]="viewer"
+      (prevMonth)="prevMonth()"
+      (nextMonth)="nextMonth()"
+      (currentMonth)="currentMonth()"
+    ></app-calendar-header>
   </ng-template>
   <table>
     <thead>
@@ -26,17 +14,11 @@
         <th>Day</th>
 
         <th *ngFor="let habit of habits">
-          <div style="display: flex; justify-content: space-evenly">
-            <div style="display: flex; align-items: center; gap: 8px">
-              {{ habit.title }}
-
-              <!-- trash icon -->
-              <ion-icon
-                name="trash-outline"
-                (click)="removeHabit(habit.id)"
-              ></ion-icon>
-            </div>
-          </div>
+          <app-calendar-habit-title
+            [habit]="habit"
+            [viewer]="viewer"
+            (removeHabit)="removeHabit(habit.id)"
+          ></app-calendar-habit-title>
         </th>
 
         <!-- add habit column -->

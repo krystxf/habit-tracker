@@ -1,0 +1,14 @@
+<div style="display: flex; justify-content: space-evenly">
+  <div style="display: flex; align-items: center; gap: 8px">
+    <input
+      [defaultValue]="habit.title"
+      [readOnly]="!editMode"
+      (focus)="editMode = true"
+      (blur)="editMode = false"
+      (keyup)="onChange($event)"
+    />
+
+    <!-- trash icon -->
+    <ion-icon name="trash-outline" (click)="handleRemoveHabit()"></ion-icon>
+  </div>
+</div>
