@@ -12,8 +12,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { ModalComponent } from './modal/modal.component'
-import { CalendarComponent } from './calendar/calendar.component';
-import { HeaderComponent } from './calendar/header/header.component';
+import { CalendarComponent } from './calendar/calendar.component'
+import { HeaderComponent } from './calendar/header/header.component'
 import { HabitTitleComponent } from './calendar/habit-title/habit-title.component'
 
 @NgModule({
