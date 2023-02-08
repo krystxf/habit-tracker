@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
 import { MainLayoutComponent } from './main-layout/main-layout.component'
 import { NavbarComponent } from './navbar/navbar.component'
-import { HabitsManagementModalComponent } from './habits-management-modal/habits-management-modal.component'
 import { HomeComponent } from './pages/home/home.component'
 import { AboutComponent } from './pages/about/about.component'
 
@@ -21,7 +20,6 @@ import { HabitTitleComponent } from './calendar/habit-title/habit-title.componen
     AppComponent,
     MainLayoutComponent,
     NavbarComponent,
-    HabitsManagementModalComponent,
     HomeComponent,
     AboutComponent,
     ModalComponent,
