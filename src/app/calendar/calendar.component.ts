@@ -208,4 +208,12 @@ export class CalendarComponent {
     this.refreshData()
     this.habits = this.readHabits()
   }
+
+  getProgress(day: number, habits: any): number {
+    const done = habits.filter((habit: any) => habit.done.includes(day))
+    const progress = (done.length / this.habits.length) * 100
+    const roundedProgress = Math.round(progress)
+
+    return roundedProgress
+  }
 }

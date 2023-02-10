@@ -1,14 +1,19 @@
-<div style="display: flex; justify-content: space-evenly">
-  <div style="display: flex; align-items: center; gap: 8px">
-    <input
-      [defaultValue]="habit.title"
-      [readOnly]="!editMode"
-      (focus)="editMode = true"
-      (blur)="editMode = false"
-      (keyup)="onChange($event)"
-    />
+<div style="display: flex; align-items: center; gap: 8px; position: relative">
+  <input
+    type="text"
+    [defaultValue]="habit.title"
+    [readOnly]="!editMode"
+    (focus)="editMode = true"
+    (blur)="editMode = false"
+    (keyup)="onChange($event)"
+    [size]="habit.title.length + 1"
+    oninput="this.size = this.value.length + 1"
+  />
 
-    <!-- trash icon -->
-    <ion-icon name="trash-outline" (click)="handleRemoveHabit()"></ion-icon>
-  </div>
+  <!-- trash icon -->
+  <ion-icon
+    style="position: absolute; right: 8px"
+    name="trash-outline"
+    (click)="handleRemoveHabit()"
+  ></ion-icon>
 </div>

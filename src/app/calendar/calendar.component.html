@@ -11,18 +11,27 @@
     <thead>
       <tr>
         <!-- row number -->
-        <th>Day</th>
+        <th>
+          <div>Day</div>
+        </th>
 
         <th *ngFor="let habit of habits">
-          <app-calendar-habit-title
-            [habit]="habit"
-            [viewer]="viewer"
-            (removeHabit)="removeHabit(habit.id)"
-          ></app-calendar-habit-title>
+          <div>
+            <app-calendar-habit-title
+              [habit]="habit"
+              [viewer]="viewer"
+              (removeHabit)="removeHabit(habit.id)"
+            ></app-calendar-habit-title>
+          </div>
         </th>
 
         <!-- add habit column -->
-        <th><ion-icon name="add-outline" (click)="addHabit()"></ion-icon></th>
+        <th>
+          <div (click)="addHabit()">
+            New habit
+            <ion-icon name="add-outline"></ion-icon>
+          </div>
+        </th>
       </tr>
     </thead>
 
@@ -32,10 +41,25 @@
         [ngClass]="{ today: isNow && i + 1 === today.getDate() }"
       >
         <!-- row number -->
-        <td>{{ i + 1 }}.</td>
+        <td>
+          {{ i + 1 }}.
+
+          <!--
+
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path
+              class="circle"
+              attr.stroke-dasharray="{{ 40 }}, 100"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0
+              1 0 -31.831"
+              />
+            </svg> 
+          
+          -->
+        </td>
 
         <td *ngFor="let habit of habits">
-          <div style="display: flex; justify-content: space-evenly">
+          <div style="width: fit-content; margin: 0 auto">
             <label class="container" (change)="toggleCheck(i, habit.id)">
               <input type="checkbox" [checked]="habit.done.includes(i)" />
               <span class="checkmark"></span>
