@@ -1,5 +1,6 @@
 import { NgModule, isDevMode, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
+import { KbarAngularModule } from 'kbar-angular'
 
 import { AppComponent } from './app.component'
 import { MainLayoutComponent } from './main-layout/main-layout.component'
@@ -30,7 +31,7 @@ import { HabitTitleComponent } from './calendar/habit-title/habit-title.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,KbarAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
