@@ -31,7 +31,8 @@ import { HabitTitleComponent } from './calendar/habit-title/habit-title.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,KbarAngularModule,
+    ReactiveFormsModule,
+    KbarAngularModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

@@ -7,7 +7,7 @@ import { Actions } from 'kbar-angular'
     <router-outlet></router-outlet>
 
     <kbar [actions]="actions">
-      <kbar-overlay ></kbar-overlay >
+      <kbar-overlay></kbar-overlay>
 
       <kbar-positioner>
         <kbar-search></kbar-search>
@@ -16,29 +16,23 @@ import { Actions } from 'kbar-angular'
     </kbar>
   `,
 })
-export class AppComponent { 
+export class AppComponent {
   get actions(): Actions {
     return [
       {
-        id: "home",
-        name: "Home",
-        keywords: ["home"],
+        id: 'home',
+        name: 'Home',
+        keywords: ['home'],
         perform: () => {
-          document.location.href = "/";
+          document.location.href = '/'
         },
       },
       {
         id: 'github',
         name: 'Show source code on GitHub',
-        keywords: [
-          'github',
-          'repo',
-          'repository',
-          'source',
-          'code', 
-        ],
+        keywords: ['github', 'repo', 'repository', 'source', 'code'],
         perform: () => {
-          window.open('https://github.com/krystxf/habit-tracker', '_blank');
+          window.open('https://github.com/krystxf/habit-tracker', '_blank')
         },
       },
     ]
